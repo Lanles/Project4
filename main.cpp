@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "Character.h"
+#include "Prop.h"
 
 int main()
 {
@@ -16,8 +17,9 @@ int main()
     const float mapSize = 4.0f;
 
     // Getting the Character class
-    Character hero;
-    hero.setScreenPos(windowDimention[0], windowDimention[1]);
+    Character hero(windowDimention[0], windowDimention[1]);
+
+    Prop rock{Vector2{0.f, 0.f}, LoadTexture("nature_tileset/Rock.png")};
 
     SetTargetFPS(60);
     // Keeping window open and adding peramiters
@@ -31,6 +33,8 @@ int main()
 
         // Draw the map
         DrawTextureEx(map, mapPos, 0.0, mapSize, WHITE);
+
+        rock.Render(hero.getWorldPos());
 
         hero.tick(GetFrameTime());
 
