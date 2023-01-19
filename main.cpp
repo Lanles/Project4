@@ -2,6 +2,7 @@
 #include "raymath.h"
 #include "Character.h"
 #include "Prop.h"
+#include "Enemy.h"
 
 int main()
 {
@@ -19,10 +20,13 @@ int main()
     // Getting the Character class
     Character hero(windowDimention[0], windowDimention[1]);
 
+    // Getting the Enemy class
+    Enemy goblin(Vector2{}, LoadTexture("characters/goblin_idle_sprite.png"), LoadTexture("characters/goblin_Run_sprite.png"));
+
     // props array for position and texture
     Prop props [2]{
-        Prop{Vector2{600.f, 300.f}, LoadTexture("nature_tileset/Rock.png")},
-        Prop{Vector2{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")}
+        Prop{Vector2{700.f, 300.f}, LoadTexture("nature_tileset/Rock.png")},
+        Prop{Vector2{400.f, 700.f}, LoadTexture("nature_tileset/Log.png")}
     };
 
     SetTargetFPS(60);
@@ -45,6 +49,7 @@ int main()
         }
 
         hero.tick(GetFrameTime());
+        goblin.tick(GetFrameTime());
 
         // Check if player is near edges of map
         if (hero.getWorldPos().x < 0.f || 
