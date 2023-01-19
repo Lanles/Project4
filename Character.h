@@ -7,6 +7,7 @@ public:
     Vector2 getWorldPos() { return worldPos; }
     void tick(float deltaTime);
     void undoMovement();
+    Rectangle GetCollisionRec();
 private:
     Texture2D texture{LoadTexture("characters/hero_idle_sprite.png")};
     Texture2D idle{LoadTexture("characters/hero_idle_sprite.png")};
@@ -22,7 +23,7 @@ private:
     float runningTime = 0;
     int frame = 0;
     int maxFrame = 6;
-    float updateTime = 1.f/8.f;
+    float updateTime = 1.f/10.f;
     // Variable for camera movement
     float speed = 4.f;
     float width = 0;

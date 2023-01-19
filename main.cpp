@@ -19,7 +19,11 @@ int main()
     // Getting the Character class
     Character hero(windowDimention[0], windowDimention[1]);
 
-    Prop rock{Vector2{0.f, 0.f}, LoadTexture("nature_tileset/Rock.png")};
+    // props array for position and texture
+    Prop props [2]{
+        Prop{Vector2{600.f, 300.f}, LoadTexture("nature_tileset/Rock.png")},
+        Prop{Vector2{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")}
+    };
 
     SetTargetFPS(60);
     // Keeping window open and adding peramiters
@@ -34,7 +38,11 @@ int main()
         // Draw the map
         DrawTextureEx(map, mapPos, 0.0, mapSize, WHITE);
 
-        rock.Render(hero.getWorldPos());
+        // Draw props
+        for (auto prop : props)
+        {
+            prop.Render(hero.getWorldPos());
+        }
 
         hero.tick(GetFrameTime());
 
@@ -47,6 +55,14 @@ int main()
             hero.undoMovement();
         }
         
+        // Check if player is coliding with prop
+        for (auto prop : props)
+        {
+            if (CheckCollisionRecs(prop.GetCollisionRec(hero.getWorldPos()), hero.GetCollisionRec()))
+            {
+                hero.undoMovement();
+            }
+        }
 
         // End drawing
         EndDrawing();
