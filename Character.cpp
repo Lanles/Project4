@@ -14,7 +14,7 @@ Character::Character(int winWidth, int winHeight)
 
 void Character::tick(float deltaTime)
 {
-    worldPosLastFrame = worldPos;
+    BaseCharacter::tick(deltaTime);
 
     // Defining what happens if a key is pressed
     Vector2 direction{};
@@ -37,18 +37,4 @@ void Character::tick(float deltaTime)
     {
         texture = idle;
     }
-
-    // Update animation frame
-    runningTime += deltaTime;
-    if (runningTime >= updateTime)
-    {
-        frame++;
-        runningTime = 0.f;
-        if (frame > maxFrame) frame = 0;
-    }
-
-    // Draw the hero
-    Rectangle source{frame * width, 0.f, rightLeft * width, height};
-    Rectangle dest{screenPos.x, screenPos.y, scale * width, scale * height};
-    DrawTexturePro(texture, source, dest, Vector2{}, 0.f, WHITE);
 }

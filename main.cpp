@@ -22,6 +22,7 @@ int main()
 
     // Getting the Enemy class
     Enemy goblin(Vector2{}, LoadTexture("characters/goblin_idle_sprite.png"), LoadTexture("characters/goblin_Run_sprite.png"));
+    goblin.setTarger(&hero);
 
     // props array for position and texture
     Prop props [2]{
