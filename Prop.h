@@ -1,7 +1,6 @@
 #include "raylib.h"
-#include "BaseCharacter.h"
 
-class Prop : public BaseCharacter
+class Prop
 {
 public:
     Prop(Vector2 pos, Texture2D tex);

@@ -1,40 +1,30 @@
 #include "Character.h"
 #include "raymath.h"
 
-Character::Character(int winWidth, int winHeight)
+Character::Character(int winWidth, int winHeight) :
+    windowWidth(winWidth),
+    windowHeight(winHeight)
 {
     width = texture.width / maxFrame;
     height = texture.height;
+}
 
-    screenPos = {
-        static_cast<float>(winWidth)/2.0f - scale * (0.5f * width),
-        static_cast<float>(winHeight)/2.0f - scale * (0.5f * height)
+Vector2 Character::getScreenPos()
+{
+    return Vector2
+    {
+        static_cast<float>(windowWidth)/2.0f - scale * (0.5f * width),
+        static_cast<float>(windowHeight)/2.0f - scale * (0.5f * height)
     };
 }
 
 void Character::tick(float deltaTime)
 {
-    BaseCharacter::tick(deltaTime);
-
     // Defining what happens if a key is pressed
-    Vector2 direction{};
-    if (IsKeyDown(KEY_A))   direction.x -= 1.0;
-    if (IsKeyDown(KEY_S))   direction.y += 1.0;
-    if (IsKeyDown(KEY_D))   direction.x += 1.0;
-    if (IsKeyDown(KEY_W))   direction.y -= 1.0;
-    if (Vector2Length(direction) != 0.0)
-    {   
-        // set worldPos = worldPos + direction ---- Vector2Normalize is used for diagonal movement so that it is not faster than normal
-        //                                     ---- Vector2Scale is used for multiplying the given direction with a desired vector
-        worldPos = Vector2Add(worldPos, Vector2Scale(Vector2Normalize(direction), speed));
-
-        // Check if hero is facing right or left
-        direction.x < 0.f ? rightLeft = -1.f : rightLeft = 1.f;
-
-        texture = run;
-    }
-    else
-    {
-        texture = idle;
-    }
+    if (IsKeyDown(KEY_A))   velocity.x -= 1.0;
+    if (IsKeyDown(KEY_S))   velocity.y += 1.0;
+    if (IsKeyDown(KEY_D))   velocity.x += 1.0;
+    if (IsKeyDown(KEY_W))   velocity.y -= 1.0;
+    
+    BaseCharacter::tick(deltaTime);
 }

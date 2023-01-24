@@ -10,11 +10,11 @@ class BaseCharacter
         virtual void tick(float deltaTime);
         void undoMovement();
         Rectangle GetCollisionRec();
+        virtual Vector2 getScreenPos() = 0;
     protected:
         Texture2D texture{LoadTexture("characters/hero_idle_sprite.png")};
         Texture2D idle{LoadTexture("characters/hero_idle_sprite.png")};
         Texture2D run{LoadTexture("characters/hero_run_sprite.png")};
-        Vector2 screenPos{};
         Vector2 worldPos{};
         Vector2 worldPosLastFrame{};
 
@@ -32,6 +32,7 @@ class BaseCharacter
         float height = 0;
         // Player scale number
         float scale = 4.0f;
+        Vector2 velocity{};
     private:
     
 };
