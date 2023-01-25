@@ -70,6 +70,15 @@ int main()
             }
         }
 
+        // Check if sword hit enemy
+        if (IsKeyPressed(KEY_SPACE))
+        {
+            if(CheckCollisionRecs(goblin.GetCollisionRec(), hero.getWeaponCollision()))
+            {
+                goblin.setAlive(false);
+            }
+        }
+        
         // End drawing
         EndDrawing();
     }

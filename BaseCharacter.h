@@ -11,6 +11,8 @@ class BaseCharacter
         void undoMovement();
         Rectangle GetCollisionRec();
         virtual Vector2 getScreenPos() = 0;
+        bool getAlive() { return alive; }
+        void setAlive(bool isAlive) { alive = isAlive; }
     protected:
         Texture2D texture{LoadTexture("characters/hero_idle_sprite.png")};
         Texture2D idle{LoadTexture("characters/hero_idle_sprite.png")};
@@ -34,7 +36,7 @@ class BaseCharacter
         float scale = 4.0f;
         Vector2 velocity{};
     private:
-    
+        bool alive = true;
 };
 
 #endif

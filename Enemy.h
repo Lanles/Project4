@@ -11,4 +11,5 @@ public:
     virtual Vector2 getScreenPos() override;
 private:
     Character* target;
+    float enemyDMG = 10.f;
 };
