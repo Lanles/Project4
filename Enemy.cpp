@@ -10,7 +10,7 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture)
 
     width = texture.width / maxFrame;
     height = texture.height;
-    speed = 3.5f;
+    speed = 3.f;
 }
 
 void Enemy::tick(float deltaTime)
@@ -19,6 +19,9 @@ void Enemy::tick(float deltaTime)
 
     // We get the velocity function
     velocity = Vector2Subtract(target -> getScreenPos(), getScreenPos());
+    
+    // Stop enemy if he is to close to player
+    if (Vector2Length(velocity) < radius) velocity = {};
 
     BaseCharacter::tick(deltaTime);
 

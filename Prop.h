@@ -7,7 +7,7 @@ public:
     void Render(Vector2 heroPosition);
     Rectangle GetCollisionRec(Vector2 heroPosition);
 private:
-    Texture2D texture{};
     Vector2 worldPosition{};
+    Texture2D texture{};
     float scale = 3.0f;
 };
